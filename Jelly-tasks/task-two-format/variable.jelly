@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<j:jelly xmlns:j="jelly:core" xmlns:g="glide">
+
+
+<j:new className="java.text.SimpleDateFormat" var="inputFormatter">
+    <j:arg value="MMMM dd yyyy HH:mm:ss"/>
+</j:new>
+
+<j:invoke on="${inputFormatter}" method="parse" var="customDate">
+    <j:arg value="December 25 2025 10:30:45"/>
+</j:invoke>
+
+<p>Formatted Date: ${customDate} </p>
+
+ <j:new className="java.text.SimpleDateFormat" var="dayFormatter">
+    <j:arg value="dd"/>
+</j:new>
+
+<j:invoke on="${dayFormatter}" method="format" var="day">
+    <j:arg value="${customDate}"/>
+</j:invoke>
+
+
+<j:new className="java.text.SimpleDateFormat" var="monthFormatter">
+    <j:arg value="MM"/>
+</j:new>
+
+<j:invoke on="${monthFormatter}" method="format" var="month">
+    <j:arg value="${customDate}"/>
+</j:invoke>
+
+
+<j:new className="java.text.SimpleDateFormat" var="yearFormatter">
+    <j:arg value="yyyy"/>
+</j:new>
+
+<j:invoke on="${yearFormatter}" method="format" var="year">
+    <j:arg value="${customDate}"/>
+</j:invoke>
+
+<p>Year: ${year}, Month: ${month}, Day: ${day}</p> 
+
+</j:jelly>
