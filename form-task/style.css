@@ -1,0 +1,50 @@
+body {
+  background: #0f172a;
+  font-family: sans-serif;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  color: #fff;
+}
+
+form {
+  background: #1e293b;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 300px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #334155;
+  background: #0f172a;
+  color: white;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: #6366f1;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:disabled {
+  background: #475569;
+  opacity: 0.5;
+}
+
+.status {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  margin-top: 10px;
+  text-align: center;
+}

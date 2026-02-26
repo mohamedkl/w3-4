@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body ng-controller="Main">
+
+  <form name="f" ng-submit="send()">
+    <h3>Register</h3>
+    <input type="text" ng-model="u.name" placeholder="Name" required>
+    <input type="email" ng-model="u.email" placeholder="Email" required>
+    <input type="password" ng-model="u.pass" placeholder="Password" required ng-minlength="4">
+
+    <button ng-disabled="f.$invalid">Join</button>
+
+    <div class="status" ng-show="u.name">Welcome, {{u.name}}</div>
+  </form>
+
+  <script>
+    angular.module('app', []).controller('Main', function ($scope) {
+      $scope.u = {};
+      $scope.send = function () { alert('Saved: ' + $scope.u.email); };
+    });
+  </script>
+
+</body>
+
+</html>
