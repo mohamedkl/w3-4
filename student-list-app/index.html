@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student List App</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <style>
+    /* Custom styling for a true dark theme background on the entire page */
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+
+    .container {
+      margin-top: 50px;
+    }
+
+    /* Custom styles for the list items to match the dark theme */
+    .list-group-item-dark {
+      background-color: #1e1e1e;
+      color: #e0e0e0;
+      border-color: #333;
+    }
+  </style>
+</head>
+
+<body ng-app="studentApp" ng-controller="studentCtrl" class="bg-dark text-light">
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <h1 class="text-center mb-4">Student List App</h1>
+
+        <div class="card bg-secondary text-light mb-4">
+          <div class="card-body">
+            <form name="addStudentForm" ng-submit="addStudent()" novalidate>
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Enter student name (Letters only)"
+                  ng-model="newStudentName" name="studentName" required ng-pattern="/^[a-zA-Z\s]*$/"
+                  ng-class="{'is-invalid': addStudentForm.studentName.$invalid && addStudentForm.studentName.$touched}">
+
+                <button class="btn btn-primary" type="submit" ng-disabled="addStudentForm.$invalid">Add Student</button>
+              </div>
+              <div class="text-danger mt-2"
+                ng-show="addStudentForm.studentName.$touched && addStudentForm.studentName.$error.pattern">
+                Please enter only letters.
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="card bg-secondary text-light">
+          <div class="card-header">
+            <h4>Current Students</h4>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center"
+              ng-repeat="student in students">
+              {{ student }}
+              <button class="btn btn-danger btn-sm" ng-click="removeStudent($index)">Delete</button>
+            </li>
+          </ul>
+          <div class="card-body text-center" ng-if="students.length === 0">
+            <p class="text-muted">No students added yet.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Define the main AngularJS application module
+    var app = angular.module('studentApp', []);
+
+    // Define the main controller
+    app.controller('studentCtrl', function ($scope) {
+
+      // Initialization: Create an empty array to hold the student names
+      $scope.students = [];
+      $scope.newStudentName = ""; // Variable bound to the input field
+
+      // Function to add a student to the list
+      $scope.addStudent = function () {
+        // Pre-check for safety (the button disabling already handles this, but it's good practice)
+        if ($scope.newStudentName && $scope.newStudentName.trim() !== "") {
+          // 1. Add the entered name to the list
+          $scope.students.push($scope.newStudentName);
+          // 2. Clear the input field after adding
+          $scope.newStudentName = "";
+          // 3. (Implicit) The 'Add Student' button will disable because the input is now empty.
+        }
+      };
+
+      // Function to remove a student from the list by their index
+      $scope.removeStudent = function (index) {
+        // ng-repeat provides the $index which corresponds directly to the array's index.
+        // We use splice to remove one item at that specific index.
+        $scope.students.splice(index, 1);
+      };
+    });
+  </script>
+</body>
+
+</html>
