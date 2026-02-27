@@ -8,7 +8,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
   <style>
-    /* Custom styling for a true dark theme background on the entire page */
+    
     body {
       background-color: #121212;
       color: #e0e0e0;
@@ -18,7 +18,6 @@
       margin-top: 50px;
     }
 
-    /* Custom styles for the list items to match the dark theme */
     .list-group-item-dark {
       background-color: #1e1e1e;
       color: #e0e0e0;
@@ -73,32 +72,21 @@
   </div>
 
   <script>
-    // Define the main AngularJS application module
     var app = angular.module('studentApp', []);
 
-    // Define the main controller
     app.controller('studentCtrl', function ($scope) {
 
-      // Initialization: Create an empty array to hold the student names
       $scope.students = [];
-      $scope.newStudentName = ""; // Variable bound to the input field
+      $scope.newStudentName = ""; 
 
-      // Function to add a student to the list
       $scope.addStudent = function () {
-        // Pre-check for safety (the button disabling already handles this, but it's good practice)
         if ($scope.newStudentName && $scope.newStudentName.trim() !== "") {
-          // 1. Add the entered name to the list
           $scope.students.push($scope.newStudentName);
-          // 2. Clear the input field after adding
           $scope.newStudentName = "";
-          // 3. (Implicit) The 'Add Student' button will disable because the input is now empty.
         }
       };
 
-      // Function to remove a student from the list by their index
       $scope.removeStudent = function (index) {
-        // ng-repeat provides the $index which corresponds directly to the array's index.
-        // We use splice to remove one item at that specific index.
         $scope.students.splice(index, 1);
       };
     });
