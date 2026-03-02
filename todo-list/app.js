@@ -3,8 +3,8 @@ var app = angular.module("todoApp", []);
 // Parent Controller
 app.controller("MainCtrl", function ($scope) {
   $scope.dailyTasks = [
-    { text: "Study AngularJS", completed: false },
-    { text: "Practice Directives", completed: true },
+    { text: "Do The Tasks", completed: false },
+    { text: "Go to the Gym", completed: true },
   ];
 });
 
